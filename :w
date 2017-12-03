@@ -1,0 +1,86 @@
+import React, {Component} from 'react';
+import {
+  Alert,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+  AsyncStorage
+} from 'react-native';
+import {Actions} from 'react-native-router-flux';
+import styles from './styles';
+
+class HomePage extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      gate: []
+    }
+  }
+
+  getProtectedQuote() {
+    Alert.alert('Soon');
+    console.log(this.state.gate);
+  }
+
+  userGate() {
+    AsyncStorage.getItem('token').then((token) => {
+      console.log(token);
+      fetch('http://localhost:3000/api/v1/gates', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Token token='+token
+        }
+      })
+      .then((response) => response.json())
+        .then((responseData) => {
+          result = responseData.map((gate) => {
+            return {
+              id: gate.id,
+              user_id: gate.user_id,
+              name: gate.name,
+              location: gate.location
+            }
+          });
+          this.setState(result);
+        })
+      })
+
+  }
+
+  async userLogout() {
+    try {
+      await AsyncStorage.removeItem('token');
+      Alert.alert('Logout Success!');
+      Actions.Authentication();
+    } catch (error) {
+      console.log('AsyncStorage error: ' + error.message);
+    }
+  }
+
+  render() {
+    return (
+        <View style={styles.container}>
+
+        <Text style={styles.title}> Gates </Text>
+
+        <TouchableOpacity style={styles.buttonWrapper} onPress={this.userGate()}>
+          <Text style={styles.buttonText}> Gates 1  </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonWrapper} onPress={this.getProtectedQuote}>
+          <Text style={styles.buttonText}> Gates 2  </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonWrapper} onPress={this.userLogout}>
+          <Text style={styles.buttonText}> Logout </Text>
+        </TouchableOpacity>
+      </View>
+        );
+  }
+}
+
+export default HomePage;
