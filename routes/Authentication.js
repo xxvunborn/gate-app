@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {
-  Text,
   TextInput,
   TouchableOpacity,
   View,
@@ -12,6 +11,7 @@ import {
   ListView
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
+import {FormLabel, FormInput, Button, Text, Icon} from 'react-native-elements'
 import styles from './styles';
 
 
@@ -84,39 +84,46 @@ class Authentication extends Component {
   render() {
     return (
         <View style={styles.container}>
-          <Text style={styles.title}> Gate </Text>
+          <Icon
+            name='account-balance'
+            color='#03a9f4'
+            />
+          <Text h2> Iniciar sesión en gate </Text>
 
           <View style={styles.form}>
-            <TextInput
-              editable={true}
-              onChangeText={(email) => this.setState({email})}
-              placeholder='Email'
-              ref='username'
-              returnKeyType='next'
-              autoCapitalize='none'
-              style={styles.inputText}
-              value={this.state.email}
+            <FormLabel></FormLabel>
+            <FormInput
+             placeholder="Correo electronico"
+             autoCapitalize='none'
+            onChangeText={(email) => this.setState({email})}/>
+
+            <FormLabel></FormLabel>
+            <FormInput
+             secureTextEntry={true}
+             autoCapitalize='none'
+             placeholder="Contraseña"
+            onChangeText={(password) => this.setState({password})}/>
+
+          </View>
+          <View style={styles.buttonLogin}>
+            <Button
+            raised
+            buttonStyle={{backgroundColor: '#03a9f4', borderRadius: 10, padding: 10}}
+            textStyle={{textAlign: 'center'}}
+            title={`Inciar sesión`}
+            onPress={this.userLogin.bind(this)}
             />
+          </View>
 
-            <TextInput
-              editable={true}
-              onChangeText={(password) => this.setState({password})}
-              placeholder='Password'
-              ref='password'
-              returnKeyType='next'
-              secureTextEntry={true}
-              style={styles.inputText}
-              value={this.state.password}
+          <View style={{position: 'absolute', left: 0, right: 0, bottom: 3}}>
+						<View style={styles.line}/>
+            <Button
+            raised
+            buttonStyle={{backgroundColor: 'white', borderRadius: 10, padding: 10}}
+            textStyle={{textAlign: 'center', color: '#03a9f4'}}
+            title={`Registrate en gate`}
+            onPress={this.userSignup.bind(this)}
             />
-
-            <TouchableOpacity style={styles.bottonWrapper} onPress={this.userLogin.bind(this)}>
-              <Text style={styles.buttonText}> Log In </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.buttonWrapper} onPress={this.userSignup.bind(this)}>
-              <Text style={styles.buttonText}> Sign Up </Text>
-            </TouchableOpacity>
-
           </View>
         </View>
         );

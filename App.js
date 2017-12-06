@@ -31,12 +31,12 @@ export default class App extends Component<{}> {
             <Scene
               component={Authentication}
               hideNavBar={true}
-              initial={true}
               key='Authentication'
               title='Authentication'
             />
             <Scene
               component={HomePage}
+              initial={true}
               hideNavBar={true}
               key='HomePage'
               title='Home Page'

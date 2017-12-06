@@ -7,7 +7,6 @@ export default styles = StyleSheet.create({
     textAlign: 'center'
   },
   buttonWrapper: {
-		backgroundColor:'#D3D3D3',
 		marginBottom: 10,
     width: 300
   },
@@ -29,6 +28,28 @@ export default styles = StyleSheet.create({
   title: {
     fontSize: 40,
     margin: 10,
-    textAlign: 'center'
+    textAlign: 'left'
   },
+  buttonLogin: {
+    margin: 20,
+    height: 350,
+    width: 350
+  },
+  buttonSignIn: {
+    margin: 20,
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 350,
+    width: 350
+  },
+  line: {
+    borderBottomColor: '#b2b2b2',
+    borderBottomWidth: 1,
+    margin: 20,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });

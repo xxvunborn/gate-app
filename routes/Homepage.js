@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {
   Alert,
   Image,
-  Text,
   TouchableOpacity,
   View,
   ScrollView,
   AsyncStorage
 } from 'react-native';
+import {FormLabel, FormInput, Button, Text, Icon} from 'react-native-elements'
 import {Actions} from 'react-native-router-flux';
 import styles from './styles';
 
@@ -43,13 +43,16 @@ class HomePage extends Component {
   setGates(responseData) {
     gates = responseData.map((gate) => {
       return (
-        <TouchableOpacity
-          style={styles.buttonWrapper}
-          key = {gate.id}
-          value = {gate.id}
-          onPress={() => this.userKeys(gate.id)}>
-          <Text style={styles.buttonText}> { gate.name } </Text>
-        </TouchableOpacity>
+      <View style={styles.buttonWrapper}>
+        <Button
+        raised
+        buttonStyle={{backgroundColor: '#03a9f4', borderRadius: 10, padding: 10}}
+        textStyle={{textAlign: 'center'}}
+        key = {gate.id}
+        value = {gate.id}
+        onPress={ () => this.userKeys(gate.id)}>
+        />
+      </View>
         )
     });
     this.setState({gates: gates})
@@ -83,13 +86,25 @@ class HomePage extends Component {
           { this.state.gates }
         </ScrollView>
 
-        <TouchableOpacity style={styles.buttonWrapper} onPress={this.userNewGate.bind(this)}>
-          <Text style={styles.buttonText}> New gate </Text>
-        </TouchableOpacity>
+      <View style={styles.buttonWrapper}>
+        <Button
+        raised
+        buttonStyle={{backgroundColor: '#03a9f4', borderRadius: 10, padding: 10}}
+        textStyle={{textAlign: 'center'}}
+        title={`Crear nueva puerta`}
+        onPress={this.userNewGate.bind(this)}
+        />
+      </View>
 
-        <TouchableOpacity style={styles.buttonWrapper} onPress={this.userLogout}>
-          <Text style={styles.buttonText}> Logout </Text>
-        </TouchableOpacity>
+      <View style={styles.buttonWrapper}>
+        <Button
+        raised
+        buttonStyle={{backgroundColor: '#03a9f4', borderRadius: 10, padding: 10}}
+        textStyle={{textAlign: 'center'}}
+        title={`Cerrar sesión`}
+        onPress={this.userLogout}
+        />
+      </View>
       </View>
         );
   }

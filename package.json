@@ -11,7 +11,9 @@
     "react-mixin": "^4.0.0",
     "react-native": "0.49.3",
     "react-native-ble-manager": "^6.2.4",
-    "react-native-router-flux": "^4.0.0-beta.23"
+    "react-native-elements": "^0.18.4",
+    "react-native-router-flux": "^4.0.0-beta.23",
+    "react-native-vector-icons": "^4.4.2"
   },
   "devDependencies": {
     "babel-jest": "21.2.0",
